@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Clinic Follow-up Tracker (Lite){% endblock %}</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 0; }
+      header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+      nav a { margin-right: 12px; }
+      .muted { color: #666; }
+      .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { border-bottom: 1px solid #eee; padding: 8px; text-align: left; vertical-align: top; }
+      .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; background: #f2f2f2; }
+      .badge.done { background: #e6f6ea; }
+      .badge.pending { background: #fff4e5; }
+      .badge.overdue { background: #fde7e9; color: #a4262c; }
+      .card { border: 1px solid #eee; border-radius: 10px; padding: 12px; margin: 12px 0; }
+      .card--center { max-width: 560px; margin-left: auto; margin-right: auto; }
+      .row { display: flex; gap: 12px; flex-wrap: wrap; }
+      label { display: block; font-weight: 600; margin-top: 8px; }
+      input, select, textarea { width: min(520px, 100%); padding: 8px; }
+      button { padding: 8px 12px; cursor: pointer; }
+      .errorlist { color: #b00020; }
+      .table-wrap { width: 100%; overflow-x: auto; }
+      form p { margin: 10px 0; }
+      ul { padding-left: 18px; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div>
+          <div><strong>Clinic Follow-up Tracker (Lite)</strong></div>
+          <div class="muted">Secure clinic-scoped follow-up tracking</div>
+        </div>
+        <div>
+          {% if user.is_authenticated %}
+            <span class="muted">Logged in as {{ user.username }}</span>
+            <form method="post" action="{% url 'logout' %}" style="display:inline; margin-left: 8px;">
+              {% csrf_token %}
+              <button type="submit">Logout</button>
+            </form>
+          {% endif %}
+        </div>
+      </header>
+
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>

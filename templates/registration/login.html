@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Login | Clinic Follow-up Tracker{% endblock %}
+
+{% block content %}
+  <div class="card card--center">
+    <h2>Login</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Login</button>
+    </form>
+    <p class="muted">Use the admin panel to create users and link them to a clinic via UserProfile.</p>
+  </div>
+{% endblock %}

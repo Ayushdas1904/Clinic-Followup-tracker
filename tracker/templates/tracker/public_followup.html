@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Follow-up | Clinic Follow-up Tracker{% endblock %}
+
+{% block content %}
+  <div class="card card--center">
+    <h2 style="margin-top: 0;">Follow-up for {{ followup.patient_name }}</h2>
+    <div class="muted">This page is public. Do not share it widely.</div>
+
+    <p><strong>Due date:</strong> {{ followup.due_date }}</p>
+
+    <h3>Instructions</h3>
+    <ul>
+      {% for line in instructions %}
+        <li>{{ line }}</li>
+      {% endfor %}
+    </ul>
+
+    {% if followup.notes %}
+      <h3>Notes</h3>
+      <div style="white-space: normal;">{{ followup.notes|linebreaksbr }}</div>
+    {% endif %}
+
+    <div class="muted">Link: {{ public_url }}</div>
+  </div>
+{% endblock %}

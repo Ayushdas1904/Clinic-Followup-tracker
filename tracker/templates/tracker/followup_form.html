@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}{% if mode == 'edit' %}Edit{% else %}Create{% endif %} Follow-up | Clinic Follow-up Tracker{% endblock %}
+
+{% block content %}
+  <div class="card card--center">
+    <h2 style="margin-top: 0;">{% if mode == 'edit' %}Edit{% else %}Create{% endif %} follow-up</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button style="background-color: rgb(45, 219, 53);" type="submit">Save</button>
+      <a class="muted" href="{% url 'dashboard' %}" style="margin-left: 8px;">Cancel</a>
+    </form>
+  </div>
+{% endblock %}
